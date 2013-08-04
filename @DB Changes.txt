@@ -184,4 +184,124 @@ CREATE TABLE `internal_transfer_requests` (
 
 
 
+ALTER TABLE `users`
+	ADD COLUMN `account_type_id` INT(11) NOT NULL AFTER `business_types_id`,
+	ADD COLUMN `investment_amount_id` INT(11) NOT NULL AFTER `account_type_id`,
+	ADD COLUMN `account_base_id` INT(11) NOT NULL AFTER `investment_amount_id`,
+	ADD COLUMN `estimate_income_id` INT(11) NOT NULL AFTER `account_base_id`,
+	ADD COLUMN `estimate_net_worth_id` INT(11) NOT NULL AFTER `estimate_income_id`,
+	ADD COLUMN `level_of_education_id` INT(11) NOT NULL AFTER `estimate_net_worth_id`,
+	ADD COLUMN `employment_status_id` INT(11) NOT NULL AFTER `level_of_education_id`,
+	ADD COLUMN `nature_of_business_id` INT(11) NOT NULL AFTER `employment_status_id`,
+	ADD COLUMN `forex_cfds` ENUM('1','0') NOT NULL DEFAULT '0' AFTER `nature_of_business_id`,
+	ADD COLUMN `equities_bonus` ENUM('1','0') NOT NULL DEFAULT '0' AFTER `forex_cfds`,
+	ADD COLUMN `other_derivatives` ENUM('1','0') NOT NULL DEFAULT '0' AFTER `equities_bonus`;
+
+
+
+CREATE TABLE `sb_account_types` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+
+CREATE TABLE `sb_investment_amounts` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+CREATE TABLE `sb_account_base` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+
+CREATE TABLE `sb_estimate_income` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+CREATE TABLE `sb_estimate_net_worth` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+CREATE TABLE `sb_level_of_education` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+CREATE TABLE `sb_employment_status` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+CREATE TABLE `sb_nature_of_business` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
 

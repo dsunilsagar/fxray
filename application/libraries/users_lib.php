@@ -37,6 +37,18 @@ class users_lib {
     private $deposit_id;
     private $country_id;
     
+    private $account_type_id;
+    private $investment_amount_id;
+    private $account_base_id;
+    private $estimate_income_id;
+    private $estimate_net_worth_id;
+    private $level_of_education_id;
+    private $employment_status_id;
+    private $nature_of_business_id;
+    private $forex_cfds;
+    private $equities_bonus;
+    private $other_derivatives;
+    
     public function getId() {
         return $this->id;
     }
@@ -276,6 +288,101 @@ class users_lib {
         $this->country_id = $country_id;
     }
 
+    
+    
+    
+    public function getAccount_type_id() {
+        return $this->account_type_id;
+    }
+
+    public function setAccount_type_id($account_type_id) {
+        $this->account_type_id = $account_type_id;
+    }
+
+    public function getInvestment_amount_id() {
+        return $this->investment_amount_id;
+    }
+
+    public function setInvestment_amount_id($investment_amount_id) {
+        $this->investment_amount_id = $investment_amount_id;
+    }
+
+    public function getAccount_base_id() {
+        return $this->account_base_id;
+    }
+
+    public function setAccount_base_id($account_base_id) {
+        $this->account_base_id = $account_base_id;
+    }
+
+    public function getEstimate_income_id() {
+        return $this->estimate_income_id;
+    }
+
+    public function setEstimate_income_id($estimate_income_id) {
+        $this->estimate_income_id = $estimate_income_id;
+    }
+
+    public function getEstimate_net_worth_id() {
+        return $this->estimate_net_worth_id;
+    }
+
+    public function setEstimate_net_worth_id($estimate_net_worth_id) {
+        $this->estimate_net_worth_id = $estimate_net_worth_id;
+    }
+
+    public function getLevel_of_education_id() {
+        return $this->level_of_education_id;
+    }
+
+    public function setLevel_of_education_id($level_of_education_id) {
+        $this->level_of_education_id = $level_of_education_id;
+    }
+
+    public function getEmployment_status_id() {
+        return $this->employment_status_id;
+    }
+
+    public function setEmployment_status_id($employment_status_id) {
+        $this->employment_status_id = $employment_status_id;
+    }
+
+    public function getNature_of_business_id() {
+        return $this->nature_of_business_id;
+    }
+
+    public function setNature_of_business_id($nature_of_business_id) {
+        $this->nature_of_business_id = $nature_of_business_id;
+    }
+
+    public function getForex_cfds() {
+        return $this->forex_cfds;
+    }
+
+    public function setForex_cfds($forex_cfds) {
+        $this->forex_cfds = $forex_cfds;
+    }
+
+    public function getEquities_bonus() {
+        return $this->equities_bonus;
+    }
+
+    public function setEquities_bonus($equities_bonus) {
+        $this->equities_bonus = $equities_bonus;
+    }
+
+    public function getOther_derivatives() {
+        return $this->other_derivatives;
+    }
+
+    public function setOther_derivatives($other_derivatives) {
+        $this->other_derivatives = $other_derivatives;
+    }
+
+
+    
+    
+    
 
 }
 ?>
