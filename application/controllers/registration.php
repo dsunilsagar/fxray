@@ -9,6 +9,8 @@ class Registration extends MY_Controller {
         $post=$this->input->post();
         if(!empty($post)){
             
+            $post['dob']=  dateFormat($this->input->post('dob'), 'Y-m-d h:i:s');
+            
             $this->session->set_flashdata('reg_form_data',$post);
             
             /**
