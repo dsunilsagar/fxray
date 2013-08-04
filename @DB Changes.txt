@@ -1,0 +1,187 @@
+
+/**************************************************************************************************************/
+/***************************************** DB Changes ******************************************************/
+/**************************************************************************************************************/
+
+
+CREATE TABLE `menus` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`page_id` INT(10) UNSIGNED NULL DEFAULT '0',
+	`custom_url` VARCHAR(512) NULL DEFAULT '',
+	`parent_id` INT(10) UNSIGNED NULL DEFAULT '0',
+	`show_in_main_menu` ENUM('1','0') NULL DEFAULT '0',
+	`order_num` INT(10) UNSIGNED NULL DEFAULT '0',
+	`name` VARCHAR(512) NULL DEFAULT '',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`status` ENUM('1','0') NULL DEFAULT '1',
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`ip_address` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `footer_menus` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`page_id` INT(10) UNSIGNED NULL DEFAULT '0',
+	`custom_url` VARCHAR(512) NULL DEFAULT '',
+	`parent_id` INT(10) UNSIGNED NULL DEFAULT '0',
+	`show_in_main_menu` ENUM('1','0') NULL DEFAULT '0',
+	`order_num` INT(10) UNSIGNED NULL DEFAULT '0',
+	`name` VARCHAR(512) NULL DEFAULT '',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`status` ENUM('1','0') NULL DEFAULT '1',
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`ip_address` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `home_page` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`page_id` INT(10) UNSIGNED NULL DEFAULT '0',
+	`custom_url` VARCHAR(512) NULL DEFAULT '',
+	`read_more_link` VARCHAR(512) NULL DEFAULT '',
+	`parent_id` INT(10) UNSIGNED NULL DEFAULT '0',
+	`show_in_main_menu` ENUM('1','0') NULL DEFAULT '0',
+	`order_num` INT(10) UNSIGNED NULL DEFAULT '0',
+	`width` INT(10) UNSIGNED NULL DEFAULT '0',
+	`height` INT(10) UNSIGNED NULL DEFAULT '0',
+	`inline_styles` INT(10) UNSIGNED NULL DEFAULT '0',
+	`name` VARCHAR(512) NULL DEFAULT '',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`status` ENUM('1','0') NULL DEFAULT '1',
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`ip_address` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `settings` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(256) NULL DEFAULT '',
+	`title` VARCHAR(256) NULL DEFAULT '',
+	`validation_classes` VARCHAR(256) NULL DEFAULT '',
+	`type` ENUM('text','select','checkbox','radio') NULL DEFAULT 'text',
+	`select_table` VARCHAR(126) NULL DEFAULT '',
+	`select_fields` VARCHAR(126) NULL DEFAULT '',
+	`value` VARCHAR(512) NULL DEFAULT '',
+	`status` ENUM('1','0') NULL DEFAULT '1',
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+
+/*************************************************************************************/
+Aug 03 2013
+/*************************************************************************************/
+
+CREATE TABLE `departments` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+   `date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+
+ALTER TABLE `contactus`
+	ADD COLUMN `department_id` INT(10) NOT NULL DEFAULT '0' AFTER `id`;
+
+
+CREATE TABLE `withdrawal_requests` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`amount` VARCHAR(255) NOT NULL DEFAULT '0',
+	`message` LONGTEXT NOT NULL,
+	`status` ENUM('1','0') NOT NULL DEFAULT '1',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+
+CREATE TABLE `proof_of_identity` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`attachments_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `proof_of_residency` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`attachments_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`name` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+
+
+CREATE TABLE `additional_documents` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`attachments_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
+	`request_id` VARCHAR(255) NOT NULL DEFAULT '',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1',
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `internal_transfer_requests` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+   `user_id` INT(10) UNSIGNED NOT NULL DEFAULT 0,
+   `deposit_account_id` VARCHAR(255) NOT NULL DEFAULT '0',
+	`deposit_account_name` VARCHAR(255) NOT NULL DEFAULT '0',
+   `amount` VARCHAR(255) NOT NULL DEFAULT '0',
+	`status` ENUM('1','0') NOT NULL DEFAULT '1', 
+	`date_added` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`created_by` INT(10) NULL DEFAULT NULL,
+	`last_modified_by` INT(10) NULL DEFAULT NULL,
+	`last_modified` TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ip_address` VARCHAR(50) NOT NULL,
+   PRIMARY KEY (`id`)
+) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
+
+
+
+
