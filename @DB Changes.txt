@@ -199,6 +199,10 @@ ALTER TABLE `users`
 
 
 
+ALTER TABLE `users`
+	ADD COLUMN `registration_type` ENUM('real','demo') NOT NULL DEFAULT 'real' AFTER `user_type`;
+
+
 CREATE TABLE `sb_account_types` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255) NOT NULL DEFAULT '',
@@ -303,5 +307,3 @@ CREATE TABLE `sb_nature_of_business` (
 	`ip_address` VARCHAR(50) NOT NULL,
    PRIMARY KEY (`id`)
 ) COLLATE='latin1_swedish_ci' ENGINE=InnoDB;
-
-

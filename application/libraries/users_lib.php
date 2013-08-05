@@ -48,6 +48,7 @@ class users_lib {
     private $forex_cfds;
     private $equities_bonus;
     private $other_derivatives;
+    private $registration_type;
     
     public function getId() {
         return $this->id;
@@ -379,8 +380,15 @@ class users_lib {
         $this->other_derivatives = $other_derivatives;
     }
 
+    public function getRegistration_type() {
+        return $this->registration_type;
+    }
 
-    
+    public function setRegistration_type($registration_type) {
+        $this->registration_type = $registration_type;
+    }
+
+
     
     
 

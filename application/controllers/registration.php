@@ -44,9 +44,10 @@ class Registration extends MY_Controller {
                         $email_data['subject'] = 'ForexRay Registration - Verify your Account within 24 hours';
                         $email_data['email_header']='ForexRay Registration - Account Verification';
                         $email_data['name'] = ucfirst($post['firstname']);
-                        $emailMessage='<p>Please <a href="'.site_url('registration/activate').'/'.$this->my_encrypt->encode($result).'" >Click Here</a> with-in 24 hours to activate your account</p><br/>'; // urlencode($email_data['to'])
+                        $emailMessage='<p>Please <a href="'.site_url('registration/activate').'/'.$this->my_encrypt->encode($result).'" class="article-content-a" style="color: #2f82de; font-weight:bold; text-decoration:none;" >Click Here</a> with-in 24 hours to activate your account</p><br/>'; // urlencode($email_data['to'])
                         $email_data['message'] = $emailMessage;
-                        $email_data['content'] =  $this->load->view('email_templates/user_reg',$email_data,true);
+                        // $email_data['content'] =  $this->load->view('email_templates/user_reg',$email_data,true);
+                        $email_data['content'] =  $this->load->view('email_templates/template_2/email_verification',$email_data,true);
                         $result = $this->mail_model->send_mail($email_data);
                     }
                     
@@ -101,7 +102,6 @@ class Registration extends MY_Controller {
         }
     }
     
-    
     function success(){
         $data['registration_info']=$registration_info=$this->session->flashdata('registration_info');
         if(empty($registration_info)){
@@ -120,21 +120,23 @@ class Registration extends MY_Controller {
         if(!empty($user_id) && is_numeric($user_id)){
             $this->users_model->activateUserID($user_id);
             
-            // Send Trading Details Mail.
-            $email_data['from'] = $this->config->item('from_mail');
-            $email_data['to'] = $this->db->escape_str($post['email']);
-            $email_data['subject'] = 'ForexRay - Welcome to ForexRay '.ucfirst($post['firstname']);
-            $email_data['email_header']='ForexRay - Your Account Details';
-            $email_data['name'] = ucfirst($post['firstname']);
-            $email_data['login_details'] = array(
-                'login_id'=>'11124556',
-                'password'=>'ihQNU99E',
-                'investor_password'=>'QcgwYnzQ',
-                'login_server'=>'Real 3'
-            );
-            $email_data['content'] =  $this->load->view('email_templates/login_details',$email_data,true);
-            $result = $this->mail_model->send_mail($email_data);
-            
+            // Send Trading Details Mail. ,Email to Download Metetrader
+            $userDetails=$this->users_model->user_details($user_id);
+            if(!empty($userDetails)){
+                $email_data['login_details'] = array(
+                    'login_id'=>$userDetails[0]->login,
+                    'password'=>$userDetails[0]->password,
+                    'investor_password'=>$userDetails[0]->password,
+                    'login_server'=>'Real 3'
+                );
+                $email_data['from'] = $this->config->item('from_mail');
+                $email_data['to'] = $this->db->escape_str($userDetails[0]->email);
+                $email_data['subject'] = 'ForexRay - Welcome to ForexRay '.ucfirst($userDetails[0]->firstname).'. Your Account Details';
+                $email_data['email_header'] = 'ForexRay - Welcome to ForexRay. Your Account Details';
+                $email_data['name'] = ucfirst($userDetails[0]->firstname);
+                $email_data['content'] = $this->load->view('email_templates/template_2/after_verification', $email_data, true);
+                $result = $this->mail_model->send_mail($email_data);
+            }
             
         } else {
             // echo 'Please contact Administrator';

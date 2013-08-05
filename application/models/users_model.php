@@ -130,23 +130,26 @@ class Users_model extends MY_Model {
         return $this->getDBResult($sql, 'object');
     }
 
-    function user_details($userid=0)
-    {
+    function user_details($userid = 0) {
         $ref_id = $this->common_model->getReferenceID('users');
-        $sql = "SELECT u.id,email,password,firstname,lastname,company,register_types_id,business_types_id,u.status,u.date_added,u.last_modified,dob,varification_status,account_verification,city,state,
+        $sql_OLD = "SELECT u.id,u.login,email,password,firstname,lastname,company,register_types_id,business_types_id,u.status,u.date_added,u.last_modified,dob,varification_status,account_verification,u.city,u.state,
                     address,zip,countries_id,home_phone,mobile_phone,office_phone,fax_no,languages_id,time_zones_id,time_zone,communicate_lang,time_to_call,newsletter,ip_security,security_questions_id,security_answer
                     FROM users u
                     LEFT JOIN users_address ua ON ua.users_id = u.id
                     LEFT JOIN users_contacts uc ON uc.users_id = u.id
                     LEFT JOIN users_settings us ON us.users_id = u.id
-                    where u.id='".$userid."' ";
-        $ecur_sql = 'select * from users_ecurrencies WHERE users_id = '.$userid;
-        $attach_sql = 'select url,original_file_name,db_file_name,id as att_id from attachments WHERE global_id = '.$userid.' and reference_id = '.$ref_id;
+                    where u.id='" . $userid . "' ";
+        $sql = "SELECT u.*
+                    FROM users u
+                    LEFT JOIN users_settings us ON us.users_id = u.id
+                    where u.id='" . $userid . "' ";
+        $ecur_sql = 'select * from users_ecurrencies WHERE users_id = ' . $userid;
+        $attach_sql = 'select url,original_file_name,db_file_name,id as att_id from attachments WHERE global_id = ' . $userid . ' and reference_id = ' . $ref_id;
         $data = $this->getDBResult($sql, 'object');
-        $data[0]->ecur_details = $this->getDBResult($ecur_sql, 'object');
-		$data[0]->attach_details = $this->getDBResult($attach_sql, 'object');
+//        $data[0]->ecur_details = $this->getDBResult($ecur_sql, 'object');
+//        $data[0]->attach_details = $this->getDBResult($attach_sql, 'object');
         //echo '<pre>';print_r($data);die;
-		return $data;
+        return $data;
     }
 
     function gettabledetails($tablenames=array())
@@ -496,6 +499,101 @@ class Users_model extends MY_Model {
 
     function save_additional_documents($post){
         return $this->saveRecord(conversion($post,'additional_documents_lib'),'additional_documents');
+    }
+    
+    function get_adminusers(){
+        $sql = 'SELECT poi.id AS attachments,u.id,firstname,email,phone,address,c.name AS country,state,
+                    IF(account_verification="1","<span style=\'color:green\'>Verified</span>","<span style=\'color:red\'>Not Verified</span>") AS account_verification_label,
+                    IF(u.status="1","<span style=\'color:green\'>Active</span>","<span style=\'color:red\'>In Active</span>") AS user_status,
+                    IF(u.varification_status="1","<span style=\'color:green\'>Verified</span>","<span style=\'color:red\'>Not Verified</span>") AS varification_status_label,
+                    IF(u.account_verification="1","<span style=\'color:green\'>Verified</span>","<span style=\'color:red\'>Not Verified</span>") AS account_verification_label,
+                    IF(u.registration_type="real","<span style=\'color:green\'>Real Account</span>","<span style=\'color:#ccc\'>Demo</span>") AS registration_type_label
+                    FROM users u
+                    LEFT JOIN countries c ON u.country_id = c.id
+                    LEFT JOIN proof_of_identity AS poi ON poi.user_id = u.id
+                    
+                    WHERE 1 
+                ';
+        
+        $post=$this->input->post(); 
+        
+        if(!empty($post['name'])){
+            $sql.=' AND p.name LIKE "%'.$post['name'].'%"';
+        }
+        if(!empty($post['fname'])){
+            $sql.='
+                AND u.firstname LIKE "%'.$post['fname'].'%"
+                ';
+        }
+        if(!empty($post['email'])){
+            $sql.='
+                AND u.email ="'.$post['email'].'"
+                ';
+        }
+        
+        if(!empty($post['account_verification'])){
+            if($post['account_verification']=='1'){
+                $sql.='
+                    AND u.account_verification="1"
+                    ';
+            }else if($post['account_verification']=='2'){
+                $sql.='
+                    AND u.account_verification="0"
+                    ';
+            }
+        }
+        if(!empty($post['documents_filter'])){
+            if($post['documents_filter']=='1'){
+                $sql.='
+                    AND poi.id>0
+                    ';
+            }else if($post['documents_filter']=='2'){
+                $sql.='
+                    AND ISNULL(poi.id)
+                    ';
+            }
+        }
+        
+        $sql.=' 
+            GROUP BY u.id ';
+        
+        
+        
+        $data_flds = array('firstname','email','mobile_phone','address','country','state','user_status','varification_status_label','account_verification_label','registration_type_label',"<a class='btn edit_ecur' href='".site_url('adminusers')."/edituser/{%id%}' id='{%id%}'><span class='inner-btn'><span class='label'>Edit</span></span></a>");
+	echo $this->users_model->display_grid($_POST,$sql,$data_flds);
+    }
+    
+    function user_proof_of_identity($user_id=0){
+        if(!empty($user_id)){
+            $get_sql = 'SELECT a.* FROM 
+                        attachments AS a
+                        INNER JOIN proof_of_identity AS p ON p.attachments_id=a.id
+                        WHERE p.user_id = "'.$user_id.'"';
+            $data = $this->getDBResult($get_sql, 'object');
+            return $data;
+        }
+    }
+    
+    function user_proof_of_residency($user_id=0){
+        if(!empty($user_id)){
+            $get_sql = 'SELECT a.* FROM 
+                        attachments AS a
+                        INNER JOIN proof_of_residency AS p ON p.attachments_id=a.id
+                        WHERE p.user_id = "'.$user_id.'"';
+            $data = $this->getDBResult($get_sql, 'object');
+            return $data;
+        }
+    }
+    
+    function user_additional_documents($user_id=0){
+        if(!empty($user_id)){
+            $get_sql = 'SELECT a.* FROM 
+                        attachments AS a
+                        INNER JOIN additional_documents AS p ON p.attachments_id=a.id
+                        WHERE p.user_id = "'.$user_id.'"';
+            $data = $this->getDBResult($get_sql, 'object');
+            return $data;
+        }
     }
     
 }

@@ -22,6 +22,7 @@
 		
 <!--        <li class="icn_page  <?php if($url_1=='adminfootermenus') echo 'active'; ?>"><a href="<?php echo base_url(); ?>adminfootermenus"><span>Footer Menus</span></a></li>-->
         <li class="icn_page  <?php if($url_1=='adminhomepage') echo 'active'; ?>"><a href="<?php echo base_url(); ?>adminhomepage"><img src="<?php echo base_url(); ?>misc/css/images/home.png" alt="home" /><span>Home Page</span></a></li>
+        <li class="icn_page  <?php if($url_1=='adminusers') echo 'active'; ?>"><a href="<?php echo base_url(); ?>adminusers"><img src="<?php echo base_url(); ?>misc/css/images/edit_users.png" alt="home" /><span>Users</span></a></li>
         <li class="icn_page  <?php if($url_1=='adminsettings') echo 'active'; ?>"><a href="<?php echo base_url(); ?>adminsettings"><img src="<?php echo base_url(); ?>misc/css/images/settings.png" alt="Settings" /><span>Settings</span></a></li>
         <li class="icn_contact  <?php if($url_1=='admincontactus') echo 'active'; ?>"><a href="<?php echo base_url(); ?>admincontactus"><img src="<?php echo base_url(); ?>misc/css/images/contact.png" alt="contactus" /><span>Contact Us</span></a></li>
         <!--<li class="icn_photo"><a href="<?php //echo base_url(); ?>admincontactus/add_contactus">Add Contact Us</a></li>-->
