@@ -35,7 +35,7 @@
                                                                     <td class="w180" width="180">
                                                                         <div align="left" class="article-content" style="font-size: 13px; line-height: 18px; color: #444444; margin-top: 0px; margin-bottom: 18px; font-family: 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;">
                                                                             <p>
-                                                                                YOUR REAL ACCOUNT <br/> LOGIN DETAILS
+                                                                                YOUR <?php if(!empty($registration_type) && $registration_type=='real'){ echo 'REAL'; }else{ echo 'DEMO'; } ?> ACCOUNT <br/> LOGIN DETAILS
                                                                             </p>
                                                                         </div>
                                                                     </td>
