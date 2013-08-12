@@ -17,7 +17,7 @@ class MY_Controller extends CI_Controller {
     private $adminUrls=array(
         'orders','users','adminpages','admincontactus','adminsendmail','admintestimonials',
         'adminnews','adminecurrency','adminpayment','adminrates','adminlibaccount','adminmenus','adminfootermenus','adminhomepage',
-        'adminsettings','adminwidgets','admingallery','adminusers'
+        'adminsettings','adminwidgets','admingallery','adminusers','adminwithdrawal_requests'
     );
 
     function __construct() {
