@@ -26,9 +26,10 @@ function selectBox($seloption, $table, $fields, $condition="", $editCo=0, $selec
     if ($condition != "")
         $sel_qry.=" where " . $condition;
 
-
-    $sel_qry.=" order by lower($arrFields[1])='other' asc,$arrFields[1] asc";
-
+    if($table=='leverage')   
+    $sel_qry.=" order by lower($arrFields[1])='other' asc,0+$arrFields[1] asc";
+    else
+    $sel_qry.=" order by lower($arrFields[1])='other' asc,$arrFields[1] asc";    
     //echo $sel_qry;
     if(!empty($seloption)){
         $option = "<option value='" . $selectval . "'>" . $seloption . "</option>";

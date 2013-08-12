@@ -69,25 +69,9 @@
                                                                                 <input type="text" id="email" name="email" placeholder="Email ID" class="required email" value="<?php if(!empty($form_data['email'])){ echo $form_data['email']; } ?>"/>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="control-group">
-                                                                            <label class="control-label" for="group_id">Group<strong class="req">*</strong></label>
-                                                                            <div class="controls">
-                                                                                <select id="group_id" name="group_id" placeholder="Group" class="required" >
-                                                                                    <?php if(!empty($form_data['group_id'])){ $group_id= $form_data['group_id']; }else{ $group_id=0; } ?>
-                                                                                    <?php echo selectBox('Select', 'groups', 'id,name', ' status=1 ', $group_id, ''); ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
 
-                                                                        <div class="control-group">
-                                                                            <label class="control-label" for="deposit_id">Deposit(for demo only)</label>
-                                                                            <div class="controls">
-                                                                                <select id="deposit_id" name="deposit_id" placeholder="Deposit" class="">
-                                                                                    <?php if(!empty($form_data['deposit_id'])){ $deposit_id= $form_data['deposit_id']; }else{ $deposit_id=0;  } ?>
-                                                                                    <?php echo selectBox('Select', 'deposits', 'id,name', ' status=1 ', $deposit_id, ''); ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+
+                                                                        
                                                                         <div class="control-group">
                                                                             <label class="control-label" for="password">Password<strong class="req">*</strong></label>
                                                                             <div class="controls">
@@ -168,21 +152,21 @@
                                                                             <h5>Trading Details</h5>
                                                                         </div>
                                                                         <blockquote>
-                                                                        <div class="control-group">
-                                                                            <label class="control-label" for="account_type_id">Account Type</label>
+                                                                                                                                                <div class="control-group">
+                                                                            <label class="control-label" for="group_id">Account Type<strong class="req">*</strong></label>
                                                                             <div class="controls">
-                                                                                <select id="account_type_id" name="account_type_id" class="">
-                                                                                    <?php if(!empty($form_data['account_type_id'])){ $account_type_id= $form_data['account_type_id']; }else{ $account_type_id=0;  } ?>
-                                                                                    <?php echo selectBox('Select', 'sb_account_types', 'id,name', ' status=1 ', $account_type_id, ''); ?>
+                                                                                <select id="group_id" name="group_id" placeholder="Group" class="required" >
+                                                                                    <?php if(!empty($form_data['group_id'])){ $group_id= $form_data['group_id']; }else{ $group_id=0; } ?>
+                                                                                    <?php echo selectBox('Select', 'groups', 'id,name', ' status=1 ', $group_id, ''); ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="control-group">
-                                                                            <label class="control-label" for="investment_amount_id">Investment Amount (USD)</label>
+                                                                            <label class="control-label" for="deposit_id">Investment Amount (USD)</label>
                                                                             <div class="controls">
-                                                                                <select id="investment_amount_id" name="investment_amount_id" class="">
-                                                                                    <?php if(!empty($form_data['investment_amount_id'])){ $investment_amount_id= $form_data['investment_amount_id']; }else{ $investment_amount_id=0;  } ?>
-                                                                                    <?php echo selectBox('Select', 'sb_investment_amounts', 'id,name', ' status=1 ', $investment_amount_id, ''); ?>
+                                                                                <select id="deposit_id" name="deposit_id" placeholder="Deposit" class="">
+                                                                                    <?php if(!empty($form_data['deposit_id'])){ $deposit_id= $form_data['deposit_id']; }else{ $deposit_id=0;  } ?>
+                                                                                    <?php echo selectBox('Select', 'deposits', 'id,name', ' status=1 ', $deposit_id, ''); ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
