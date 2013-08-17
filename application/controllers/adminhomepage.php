@@ -21,7 +21,7 @@ class Adminhomepage extends MY_Controller {
             return;
         }
         $data=$post;
-        $data['menus']=$this->adminhomepage_model->get_home_page_sections(FALSE,$post);
+        $data['menus']=$this->adminhomepage_model->get_home_page_sections($this->config->item('cache_page'),$post);
         $this->load->view('adminhomepage/ajax_homepage_list',$data);
     }
 

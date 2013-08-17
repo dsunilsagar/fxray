@@ -11,7 +11,7 @@ class Adminsettings extends MY_Controller {
     }
 
     public function index() {
-        $data['settings'] = $this->adminsettings_model->get_settings(FALSE);
+        $data['settings'] = $this->adminsettings_model->get_settings($this->config->item('cache_settings'));
         $this->load->view('adminsettings/index', $data);
     }
 

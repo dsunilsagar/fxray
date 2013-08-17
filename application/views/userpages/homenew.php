@@ -20,7 +20,7 @@
                          <div class="hdr1 f_b m_b_10">Account Verification</div>
                          <?php $user_details = unserialize($this->session->userdata['user_details']); ?>
                          <div class="m_b_10 reset_alert">
-                            <?php if($user_details->account_verification=='1'){ ?>
+                            <?php if(isset($user_details->account_verification) && $user_details->account_verification=='1'){ ?>
                             <div class="alert_success">Your Account is validated</div>
                             <?php }else{ ?>
                             <div class="alert_error">Your Account is not validated, Please <a href="<?php echo base_url(); ?>userpages/validation_documents">Click Here</a> to upload your documents.</div>
@@ -28,31 +28,50 @@
                          </div>
                         
                          <div class="hdr1 f_b m_b_10">Account Summary (USD)</div>
+                         <?php 
+                            $size = sizeof($info);
+                            $beginIndex = 3;
+                            
+                            $balance     = $this->mql_model->MQ_GetParam($info[$beginIndex]);
+                            $equity      = $this->mql_model->MQ_GetParam($info[$beginIndex+1]);
+                            $margin      = $this->mql_model->MQ_GetParam($info[$beginIndex+2]);
+                            $free_margin = $this->mql_model->MQ_GetParam($info[$beginIndex+3]);
+                            $margin_level= $margin!=0 ? number_format(100*($equity/$margin),2,'.','').'%' : '0%';
+                            
+                            $cnt = 0;
+                            for ($i = $beginIndex + 4; $i < $size; $i++) {
+                                if ($info[$i] === '0')
+                                    break;
+                                $row = explode("\t", $info[$i]);
+                                ++$cnt;
+                            }
 
+                            $profit = $this->mql_model->MQ_GetParam($info[$i+3])+$this->mql_model->MQ_GetParam($info[$i+1])+$this->mql_model->MQ_GetParam($info[$i+2]);
+                         ?>
                          <div class="o_h sum_box r_f">
                             <div class="f_l box">
                                 <div class="lft_fld">Account Balance</div>
-                                <div class="rgt_fld">0.00</div>
+                                <div class="rgt_fld"><?php if(!empty($balance)) echo $balance; else echo '0.00'; ?></div>
                             </div>
                             <div class="f_l box">
                                 <div class="lft_fld">Margin</div>
-                                <div class="rgt_fld">0.00</div>
+                                <div class="rgt_fld"><?php if(!empty($margin)) echo $margin; else echo '0.00';  ?></div>
                             </div>
                             <div class="f_l box">
                                 <div class="lft_fld">Equity</div>
-                                <div class="rgt_fld">0.00</div>
+                                <div class="rgt_fld"><?php if(!empty($equity)) echo $equity; else echo '0.00';  ?></div>
                             </div>
                             <div class="f_l box">
                                 <div class="lft_fld">Free Margin</div>
-                                <div class="rgt_fld">0.00</div>
+                                <div class="rgt_fld"><?php if(!empty($free_margin)) echo $free_margin; else echo '0.00';  ?></div>
                             </div>
                             <div class="f_l box">
                                 <div class="lft_fld">Unrealized P/L</div>
-                                <div class="rgt_fld">0.00</div>
+                                <div class="rgt_fld"><?php if(!empty($profit)) echo $profit; else echo '0.00';  ?></div>
                             </div>
                             <div class="f_l box">
                                 <div class="lft_fld">Margin Level</div>
-                                <div class="rgt_fld">0%</div>
+                                <div class="rgt_fld"><?php if(!empty($margin_level)) echo $margin_level; else echo '0.00';  ?>%</div>
                             </div>
 
                          </div>

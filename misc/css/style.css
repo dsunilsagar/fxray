@@ -271,13 +271,24 @@
 	padding: 3px;
 }
 .app .left_ca .box li a{
-	background: url(images/tip.png) no-repeat left center;
+	background: url(images/tip.png) no-repeat left 1px;
 	padding-left: 8px;
-	color: #323232;
+	
+	color: #646464;
 	text-shadow: 0 1px 0 #FDFDFD;
-	font-size: 13px;
-	font-family: "economica_reg", sans-serif;
+	font-size: 9px;
+	/*font-family: "economica_reg", sans-serif;*/
 }
+
+.app .left_ca .box_update .box li a:hover{color: #000;}
+.app .left_ca .box_update .box li a:active{color: #777;}
+.app .left_ca .box_update .box.one li a.fl{ width: 138px}
+.app .left_ca .box_update .box.two li a.fl{ width: 128px}
+.app .left_ca .box_update .box.three li a.fl{ width: 110px}
+.app .left_ca .box_update .box.one li a.mr12{ margin-right: 0}
+
+.app .left_ca .box_update .box li a.fr{ float: left !important;}
+
 .app .left_ca .forex_desc p{
 	line-height: 18px;
 }

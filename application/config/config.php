@@ -367,6 +367,15 @@ $config['contact_us_mail'] = 'forexray@gmail.com';
 $config['document_root'] = 'D:/wamp/www/Dropbox/images/forexray_versions/forex_feb_20/';
 
 
+/*
+ * Config Params for cache switching.
+ */
+
+$config['cache_menu']=FALSE;
+$config['cache_page']=FALSE;
+$config['cache_settings']=FALSE;
+
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

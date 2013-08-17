@@ -24,15 +24,6 @@
                                         <li><a class="current"><?php if (isset($pages[0]->title)) echo $pages[0]->title; ?></a></li>
                                     </ul>
                                     <div class="pg_data_view">
-                                        <?php if(!empty($page_menu)){  ?>
-                                            <div class="side_left_nav fl" id="leftCol">
-                                                <?php foreach($page_menu as $k=>$v){  ?>
-                                                <p>
-                                                    <a href="<?php echo site_url($v->abbr.'/'.$v->url_key);  ?>" class="<?php if($v->url_key==$url_2){ echo 'selected'; } ?>"><?php echo $v->name;  ?></a>
-                                                </p>
-                                                <?php } ?>
-                                            </div>
-                                        <?php  }  ?>
                                         <?php if (!empty($pages)) {
                                             ?>
                                             <div class="post  pad10 newsbox" style="">
@@ -61,6 +52,15 @@
                             </div>
 							
                             <div class="right_ca fl">
+                                <?php if(!empty($page_menu)){  ?>
+                                    <div class="side_left_nav pg_data sidebar_right_nav" id="leftCol" style="margin:42px 0 20px 10px;width: 245px;">
+                                        <?php foreach($page_menu as $k=>$v){  ?>
+                                        <p>
+                                            <a href="<?php echo site_url($v->abbr.'/'.$v->url_key);  ?>" class="<?php if($v->url_key==$url_2){ echo 'selected'; } ?>"><?php echo $v->name;  ?></a>
+                                        </p>
+                                        <?php } ?>
+                                    </div>
+                                <?php  }  ?>
                                 
                                 <?php $this->load->view('common/sidebar_1'); ?>
                                

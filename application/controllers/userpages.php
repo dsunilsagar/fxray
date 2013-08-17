@@ -14,12 +14,39 @@ class Userpages extends MY_Controller {
         redirect('userpages/homenew');
     }
     
+//    public function trade() {
+//        $this->load->view('userpages/trade');
+//    }
+    
     public function trade() {
-        $this->load->view('userpages/trade');
+        $post = $this->session->userdata('mql_login');
+        $data = $this->mql_model->MQ_Login_Account($post['login_name'], $post['user_password']);
+        if (!$data['error']) {
+            $var = new stdclass();
+            $var->info = explode("\r\n", $data['response']);
+            
+            $this->load->view('userpages/trade', $var);
+        } else {
+            redirect('login/logout');
+        }
     }
     
+//    public function account_history() {
+//        $this->load->view('userpages/account_history');
+//    }
+    
     public function account_history() {
-        $this->load->view('userpages/account_history');
+        $post = $this->session->userdata('mql_login');
+        $data = $this->mql_model->MQ_History($post['login_name'], $post['user_password']);
+        if (!$data['error']) {
+
+            $var = new stdclass();
+            $var->info = explode("\r\n", $data['response']);
+            
+            $this->load->view('userpages/account_history', $var);
+        } else {
+            redirect('login/logout');
+        }
     }
     
     /*
@@ -32,7 +59,18 @@ class Userpages extends MY_Controller {
     }
     
     public function homenew() {
-        $this->load->view('userpages/homenew');
+        $post = $this->session->userdata('mql_login');
+        $data = $this->mql_model->MQ_Login_Account($post['login_name'], $post['user_password']);
+        if (!$data['error']) {
+            $var = new stdclass();
+            $var->info = explode("\r\n", $data['response']);
+
+            $this->load->view('userpages/homenew', $var);
+        } else {
+            redirect('login/logout');
+        }
+        
+        
     }
 
     public function depositnew() {

@@ -9,7 +9,7 @@
     <div class="mt40 ml10 stocks_list">
         <div class="tabs" style="display:none">
             <ul class="navlist">
-                <li class="bdr_none first"><a href="#first"><span>Forexaa</span></a></li>
+                <li class="bdr_none first"><a href="#first"><span>Forex</span></a></li>
                 <li><a href="#second" class="second"><span>Commodities</span></a></li>
                 <li><a href="#third"><span>Stocks</span></a></li>
                 <li class="li_last"><a href="#four"><span>Indices</span></a></li>					

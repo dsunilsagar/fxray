@@ -32,8 +32,8 @@
             </div>
 
             <script type="text/javascript" src="<?=base_url()?>misc/js/jquery.nivo.slider.js"></script>
-            <div>
-                    <div class="fl box">
+            <div class="box_update">
+                    <div class="fl box one">
                             <?php if(!empty($home_pages_sections[0]->content)){ echo html_entity_decode($home_pages_sections[0]->content); } ?>	
 							<?php if(!empty($home_pages_sections[0]->read_more_link)){  ?>	
 							<div class="overlay"><a style="color: white;" href="<?php echo $home_pages_sections[0]->read_more_link; ?>">Read More</a></div>
@@ -42,7 +42,7 @@
                             <div class="fr r_more brad4"><a href="<?php echo $home_pages_sections[0]->read_more_link; ?>">Read More</a></div> <?php } ?>
 <?php */?>                           
                     </div>
-                    <div class="fl box">
+                    <div class="fl box two">
                             <?php if(!empty($home_pages_sections[1]->content)){ echo html_entity_decode($home_pages_sections[1]->content); } ?>	
                            <?php /*?> <?php if(!empty($home_pages_sections[1]->read_more_link)){  ?>	
                             <div class="fr r_more brad4"><a href="<?php echo $home_pages_sections[1]->read_more_link; ?>">Read More</a></div>
@@ -52,7 +52,7 @@
 							<?php } ?>
 							
                     </div>
-                    <div class="fl box">
+                    <div class="fl box three">
                             <?php if(!empty($home_pages_sections[2]->content)){ echo html_entity_decode($home_pages_sections[2]->content); } ?>	
                            <?php /*?> <?php if(!empty($home_pages_sections[2]->read_more_link)){  ?>	
                             <div class="fr r_more brad4"><a href="<?php echo $home_pages_sections[2]->read_more_link; ?>">Read More</a></div>

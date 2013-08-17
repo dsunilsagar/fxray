@@ -9,7 +9,7 @@
     
     
     <link rel="stylesheet" href="public/css/bootstrap-image-gallery.min.css">
-    <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+    <script src="public/js/load-image.min.js"></script>
     <script src="public/js/bootstrap-image-gallery.min.js"></script>
 
     <script type="text/javascript">

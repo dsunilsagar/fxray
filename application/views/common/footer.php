@@ -21,7 +21,7 @@
                                             
                     <?php 
                         $langDetails=array('language_id'=>$userLangID);
-                        $menus=$this->adminmenus_model->get_menus(FALSE,$langDetails,'','footer_order_num'); 
+                        $menus=$this->adminmenus_model->get_menus($this->config->item('cache_menu'),$langDetails,'','footer_order_num'); 
                     ?>
                     <?php // echo '<pre>'; print_r($menus); echo '</pre>'; ?>
                     <?php if(!empty($menus)){  ?>

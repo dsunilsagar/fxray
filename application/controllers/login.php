@@ -15,22 +15,41 @@ class Login extends MY_Controller {
     }
 
     public function loginUser() {
-        if($this->login_model->is_user_unverified($_POST)){
-            $this->session->set_userdata('login_but_verify',TRUE);
-            $this->session->set_flashdata('error_msg','Please verify your email.'); //  In case you did not receive the email, You can <a href="'.  site_url('login/resend_verification_link/'.urlencode($this->db->escape_str($post['login_name']))).'" target="_blank">click here</a> to re-send the verification Email.
-            redirect('login');
-        }else if ($this->login_model->login($_POST)) {
-            $user_details = unserialize($this->session->userdata['user_details']);
-            /* echo '<pre>';
-              print_r($user_details);die; */
-            if ($user_details->user_type == 'a') {
-                redirect('adminpages');
-            } else {
+        
+        if (isset($_POST) && is_numeric($_POST['login_name'])) {
+            /**
+             * MQL Login
+             */
+            $response = $this->mql_model->MQ_Login($_POST['login_name'], $_POST['user_password']);
+
+            if ($response == 'Success') {
+                $this->login_model->login_web($_POST);
                 redirect('userpages');
+            } else {
+                $data['message'] = $response;
+                $this->load->view('login/general/index', $data);
             }
-        } else {
-            $data['message'] = 'Invalid Username or Password';
-            $this->load->view('login/general/index', $data);
+        }else{
+            /*
+             * Normal Login
+             */
+            if($this->login_model->is_user_unverified($_POST)){
+                $this->session->set_userdata('login_but_verify',TRUE);
+                $this->session->set_flashdata('error_msg','Please verify your email.'); //  In case you did not receive the email, You can <a href="'.  site_url('login/resend_verification_link/'.urlencode($this->db->escape_str($post['login_name']))).'" target="_blank">click here</a> to re-send the verification Email.
+                redirect('login');
+            }else if ($this->login_model->login($_POST)) {
+                $user_details = unserialize($this->session->userdata['user_details']);
+                /* echo '<pre>';
+                  print_r($user_details);die; */
+                if ($user_details->user_type == 'a') {
+                    redirect('adminpages');
+                } else {
+                    redirect('userpages');
+                }
+            } else {
+                $data['message'] = 'Invalid Username or Password';
+                $this->load->view('login/general/index', $data);
+            }
         }
     }
 

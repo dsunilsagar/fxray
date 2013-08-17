@@ -56,7 +56,57 @@ class Login_model extends MY_Model {
             return false;
         }
     }
-
+    function login_web($post) {
+       echo $sql = "select * from users
+                where login='" . $this->db->escape_str($post['login_name']) . "'
+                ";
+        $rs = $this->db->query($sql);
+		
+        if ($rs->num_rows() > 0) {
+            $user_details = $rs->first_row();
+            $user_details_serialized = serialize($user_details);
+            $this->session->set_userdata('user_details', $user_details_serialized);
+			$this->session->set_userdata('mql_login', $post);
+            $browser = new Browser();
+            $data['users_id'] = $user_details->id;
+            $data['login_time'] = gmdate("Y-m-d H:i:s", time());
+            $data['browser'] = $browser->getBrowser();
+            $data['version'] = $browser->getVersion();
+            $data['os'] = $browser->getPlatform();
+            $data['is_robot'] = $browser->isRobot() ? 'Y' : 'N';
+            $data['user_agent'] = $browser->getUserAgent();
+            $data['is_chrome_frame'] = $browser->isChromeFrame() ? 'Y' : 'N';
+            $login_trace_id = $this->saveRecord(conversion($data, 'login_trace'), 'login_trace');
+            $this->session->set_userdata('login_trace_id', $login_trace_id);
+            return true;
+        } else {
+		
+		    $user_details->id =999999;
+			
+			
+			$info = explode("\r\n",$res);
+            $user_details->login =$post['login_name'];
+			$user_details->password =$post['user_password'];
+			$user_details->firstname ='Username';
+			$user_details->lastname ='Account';
+			
+			$user_details_serialized = serialize($user_details);
+            $this->session->set_userdata('user_details', $user_details_serialized);
+			$this->session->set_userdata('mql_login', $post);
+            $browser = new Browser();
+            $data['users_id'] = $user_details->id;
+            $data['login_time'] = gmdate("Y-m-d H:i:s", time());
+            $data['browser'] = $browser->getBrowser();
+            $data['version'] = $browser->getVersion();
+            $data['os'] = $browser->getPlatform();
+            $data['is_robot'] = $browser->isRobot() ? 'Y' : 'N';
+            $data['user_agent'] = $browser->getUserAgent();
+            $data['is_chrome_frame'] = $browser->isChromeFrame() ? 'Y' : 'N';
+            $login_trace_id = $this->saveRecord(conversion($data, 'login_trace'), 'login_trace');
+            $this->session->set_userdata('login_trace_id', $login_trace_id);
+            return false;
+        }
+    } 
     function is_user_unverified($post){
         $sql = "select * from users
                 where email='" . $this->db->escape_str($post['login_name']) . "'

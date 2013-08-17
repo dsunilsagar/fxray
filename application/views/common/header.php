@@ -44,6 +44,9 @@
         <script type="text/javascript" src="<?= base_url() ?>misc/js/ie6.js"></script>  
         <script type="text/javascript" src="<?= base_url() ?>misc/js/crossbrowser.js"></script>  
         <script type="text/javascript" src="<?= base_url() ?>misc/js/script.js"></script>
+        
+        <script language="javascript" type="text/javascript" src="http://forexray.com/chat/client.php?key=LDFEC3812V201B1E11M8ACE6A6"></script>
+        
         <script type="text/javascript">
             $(function(){
                 $('a.active').parents('li.first_level').find('a:first').addClass('active');
@@ -178,7 +181,7 @@
                                     <?php echo selectBox('', 'languages', 'id,name', ' status=1 ', $userLangID, ''); ?>
                                 </select>
                             </a>
-                            <a class="h_icon chat f12 fl">Chat</a>
+                            <a id='liveadmin' class=" f12 fl">Chat</a>
                             <div id="dd" class="wrapper-dropdown-3 lang_ico f12 fl" tabindex="1">
                                 <span>English</span>
                             </div>
@@ -232,7 +235,7 @@
 
             <?php 
                 $langDetails=array('language_id'=>$userLangID);
-                $menus=$this->adminmenus_model->get_menus(FALSE,$langDetails);  
+                $menus=$this->adminmenus_model->get_menus($this->config->item('cache_menu'),$langDetails);  
             ?>
             <?php // echo '<pre>'; print_r($menus); echo '</pre>'; ?>
             <?php if(!empty($menus)){  ?>

@@ -15,7 +15,7 @@ class Home extends MY_Controller {
         $userLangID=$this->session->userdata('user_language_id');
         $langDetails=array('language_id'=>$userLangID);
         
-        $data['home_pages_sections'] = $this->adminhomepage_model->get_home_page_sections(FALSE,$langDetails);
+        $data['home_pages_sections'] = $this->adminhomepage_model->get_home_page_sections($this->config->item('cache_page'),$langDetails);
         $newsWhere_SQL = " AND n.language_id=$userLangID ";
         $data['news'] = $this->adminhomepage_model->getnews($newsWhere_SQL,' LIMIT 8');
 

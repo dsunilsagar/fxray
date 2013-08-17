@@ -1,10 +1,10 @@
-<?php $this->load->view('common/admin/main_header'); ?>
+<?php $this->load->view('common/admin/widget_header'); ?>
 		
 	<script type="text/javascript" src="<?php echo base_url();?>public/js/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>public/js/ckeditor/adapters/jquery.js"></script>
 
-    <script>
-	var base_url = '<?php echo base_url();?>'
+        <script>
+            var base_url = '<?php echo base_url();?>'
 	</script>
 	<script type="text/javascript">
 
@@ -35,7 +35,7 @@
     $(function(){
         //$('.column').equalHeight();
     });
-	</script>
+    </script>
     
 
 </head>
@@ -67,6 +67,11 @@
 	
 <section id="main" class="column section">
 	<div class="form_prp">
+            <div class="fr">
+                <?php $this->load->view('admingallery/view_gallery');  ?>
+            </div>
+            <div class="clearfix"></div>
+            <br/>
 	<form name="add_page" id="add_page" action="" method="post" >
 	<input type='hidden' name='id' id='id' value='<?php echo $page_id;?>'/> 
 		<div class="h_2"><?php echo $sub_heading;?> Page</div>
@@ -258,6 +263,11 @@ var CKconfig = {
 	 forcePasteAsPlainText : true
 };
 $('.jquery_ckeditor').ckeditor();
+
+    $('.modal_close').live('click',function(){
+        $(this).parents('div.modal:first').modal('hide');
+    });
+
 });
 </script>	
 </div>
