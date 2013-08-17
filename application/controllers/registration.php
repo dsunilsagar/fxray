@@ -31,24 +31,48 @@ class Registration extends MY_Controller {
             */
             if($captchaRows->count == 0){
                 $this->session->set_flashdata('error_msg','Please enter the correct text from the image.');
-                redirect('registration');
+                if($post['registration_type']=='demo')
+                redirect('registration#Demo_Acc_Tab');
+                else
+                redirect('registration#Real_Acc_Tab');    
             }else if ($this->formtoken->validateToken($post)) {
+                
+                $post['varification_status']=1;
                 
                 // Save the registration form.
                 $result = $this->users_model->save_registration($post);
                 if($result){
                     
                     if(empty($post['id'])){
+                        
+                        $info=$this->mql_model->create_account_mql($result);
+                        
+                         if(!$info['error'])
+                        {
+                        $loginNum=$info['response'];
+                        $sql = 'update users set login="'.$loginNum.'", varification_status = "1" where id = "'.$result.'" ';
+                        $this->db->query($sql);
+                        
                         $email_data['from'] = $this->config->item('from_mail');
                         $email_data['to'] = $this->db->escape_str($post['email']);
-                        $email_data['subject'] = 'ForexRay Registration - Verify your Account within 24 hours';
-                        $email_data['email_header']='ForexRay Registration - Account Verification';
+                        $email_data['subject'] = 'ForexRay Account Details';
+                        $email_data['email_header']='ForexRay Account Details';
                         $email_data['name'] = ucfirst($post['firstname']);
-                        $emailMessage='<p>Please <a href="'.site_url('registration/activate').'/'.$this->my_encrypt->encode($result).'" class="article-content-a" style="color: #2f82de; font-weight:bold; text-decoration:none;" >Click Here</a> with-in 24 hours to activate your account</p><br/>'; // urlencode($email_data['to'])
+                        $emailMessage='Login:'.$loginNum.'<br>Password:'.$post['password']; // urlencode($email_data['to'])
                         $email_data['message'] = $emailMessage;
                         // $email_data['content'] =  $this->load->view('email_templates/user_reg',$email_data,true);
                         $email_data['content'] =  $this->load->view('email_templates/template_2/email_verification',$email_data,true);
                         $result = $this->mail_model->send_mail($email_data);
+                        
+                        }else{
+                             $sql = 'delete from users  where id = "'.$result.'" ';
+                             $this->db->query($sql);
+                             $this->session->set_flashdata('error_msg',$info['response']);
+                            if($post['registration_type']=='demo')
+                            redirect('registration#Demo_Acc_Tab');
+                            else
+                           redirect('registration#Real_Acc_Tab');
+                        }
                     }
                     
                 }

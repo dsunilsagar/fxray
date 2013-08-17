@@ -157,7 +157,7 @@
                                                                             <div class="controls">
                                                                                 <select id="group_id" name="group_id" placeholder="Group" class="required" >
                                                                                     <?php if(!empty($form_data['group_id'])){ $group_id= $form_data['group_id']; }else{ $group_id=0; } ?>
-                                                                                    <?php echo selectBox('Select', 'groups', 'id,name', ' status=1 ', $group_id, ''); ?>
+                                                                                    <?php echo selectBox('Select', 'groups', 'id,name', ' status=1 and id!=1 ', $group_id, ''); ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -335,25 +335,9 @@
                                                                                 <input type="text" id="email_2" name="email" placeholder="Email ID" class="required email" value="<?php if(!empty($form_data['email'])){ echo $form_data['email']; } ?>"/>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="control-group">
-                                                                            <label class="control-label" for="group_id_2">Group<strong class="req">*</strong></label>
-                                                                            <div class="controls">
-                                                                                <select id="group_id_2" name="group_id" placeholder="Group" class="required" >
-                                                                                    <?php if(!empty($form_data['group_id'])){ $group_id= $form_data['group_id']; }else{ $group_id=0; } ?>
-                                                                                    <?php echo selectBox('Select', 'groups', 'id,name', ' status=1 ', $group_id, ''); ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+                                                                        <input type='hidden' name='group_id' value='1'>
 
-                                                                        <div class="control-group">
-                                                                            <label class="control-label" for="deposit_id_2">Deposit(for demo only)</label>
-                                                                            <div class="controls">
-                                                                                <select id="deposit_id_2" name="deposit_id" placeholder="Deposit" class="">
-                                                                                    <?php if(!empty($form_data['deposit_id'])){ $deposit_id= $form_data['deposit_id']; }else{ $deposit_id=0;  } ?>
-                                                                                    <?php echo selectBox('Select', 'deposits', 'id,name', ' status=1 ', $deposit_id, ''); ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
+                                                                        
                                                                         <div class="control-group">
                                                                             <label class="control-label" for="password_2">Password<strong class="req">*</strong></label>
                                                                             <div class="controls">
@@ -429,20 +413,11 @@
                                                                         </div>
                                                                         <blockquote>
                                                                         <div class="control-group">
-                                                                            <label class="control-label" for="account_type_id_2">Account Type</label>
+                                                                            <label class="control-label" for="deposit_id_2">Deposit(for demo only)</label>
                                                                             <div class="controls">
-                                                                                <select id="account_type_id_2" name="account_type_id" class="">
-                                                                                    <?php if(!empty($form_data['account_type_id'])){ $account_type_id= $form_data['account_type_id']; }else{ $account_type_id=0;  } ?>
-                                                                                    <?php echo selectBox('Select', 'sb_account_types', 'id,name', ' status=1 ', $account_type_id, ''); ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="control-group">
-                                                                            <label class="control-label" for="investment_amount_id_2">Investment Amount (USD)</label>
-                                                                            <div class="controls">
-                                                                                <select id="investment_amount_id_2" name="investment_amount_id" class="">
-                                                                                    <?php if(!empty($form_data['investment_amount_id'])){ $investment_amount_id= $form_data['investment_amount_id']; }else{ $investment_amount_id=0;  } ?>
-                                                                                    <?php echo selectBox('Select', 'sb_investment_amounts', 'id,name', ' status=1 ', $investment_amount_id, ''); ?>
+                                                                                <select id="deposit_id_2" name="deposit_id" placeholder="Deposit" class="">
+                                                                                    <?php if(!empty($form_data['deposit_id'])){ $deposit_id= $form_data['deposit_id']; }else{ $deposit_id=0;  } ?>
+                                                                                    <?php echo selectBox('Select', 'deposits', 'id,name', ' status=1 ', $deposit_id, ''); ?>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -547,7 +522,8 @@
                                 <?php $this->load->view('common/sidebar_1'); ?>
                                 
                                 <div class="mt40 ml10 stocks_list">
-                                    <div class="tabs">
+								 <iframe src="http://forexray.com/plugins/raju/terminal.php" height="240px"></iframe>
+                                    <div class="tabs" style="display:none">
                                         <ul class="navlist">
                                             <li class="bdr_none first"><a href="#first"><span>Forex</span></a></li>
                                             <li><a href="#second" class="second"><span>Commodities</span></a></li>
@@ -684,10 +660,10 @@
        
        $('#registration_form_2').validate({
            rules:{
-               password:{
+               password_2:{
                    password_format:true
                },
-               confirm_password:{
+               confirm_password_2:{
                     equalTo: "#password"
                },
                email:{
@@ -709,10 +685,10 @@
                leverage_id:{
                    required:'Please select Leverage'
                },
-               password:{
+               password_2:{
                    required:'Please enter your password'
                },
-               confirm_password:{
+               confirm_password_2:{
                    required:'Please enter your password',
                    equalTo:'Please enter the same password as above'
                },

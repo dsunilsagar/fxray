@@ -63,11 +63,12 @@
                             <div class="right_ca fl">
                                 
                                 <?php $this->load->view('common/sidebar_1'); ?>
-                                
-                                <div class="mt40 ml10 stocks_list">
-                                    <div class="tabs">
+                               
+                                <div class="mt40 ml10 stocks_list" >
+								 <iframe src="http://forexray.com/plugins/raju/terminal.php" height="240px"></iframe>
+                                    <div class="tabs" style="display:none">
                                         <ul class="navlist">
-                                            <li class="bdr_none first"><a href="#first"><span>Forex</span></a></li>
+                                            <li class="bdr_none first"><a href="#first"><span>Forex11</span></a></li>
                                             <li><a href="#second" class="second"><span>Commodities</span></a></li>
                                             <li><a href="#third"><span>Stocks</span></a></li>
                                             <li class="li_last"><a href="#four"><span>Indices</span></a></li>					

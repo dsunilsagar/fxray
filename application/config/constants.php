@@ -37,5 +37,17 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 
+define('T_MT4_HOST',      '91.109.24.215');               // MetaTrader: Server
+define('T_MT4_PORT',       443);                      // MetaTrader: Port
+define('T_PLUGIN_MASTER', 'test1234');                  // Plugin: Master Password
+define('T_PORT',443);                  // MetaTrader Server Port
+define('T_TIMEOUT',5);                 // MetaTrader Server Connection Timeout, in sec
+
+define('T_CACHEDIR','cache/');         // cache files directory
+define('T_CACHETIME',5);               // cache expiration time, in sec
+define('T_CLEAR_DELNUMBER',15);        // limit of deleted files, after which process of cache clearing should be stopped
+
+
+
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

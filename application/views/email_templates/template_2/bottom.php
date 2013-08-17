@@ -13,7 +13,7 @@
                                                     <td class="hide w0" width="60"></td>
                                                     <td class="hide w0" width="160" valign="top">
                                                         <p id="street-address" align="right" class="footer-content-right" style="color: #b0b0b0; white-space: normal;font-size: 11px;">
-                                                            <span>123 Fake Street,</span><br><span>Brington, NY</span>
+                                                            <span>Address,</span><br><span>Strret, State</span>
                                                         </p>
                                                     </td>
                                                     <td class="w30" width="30"></td>

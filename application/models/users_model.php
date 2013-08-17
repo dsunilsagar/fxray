@@ -22,7 +22,7 @@ class Users_model extends MY_Model {
         }
         else
         {
-            $_POST['varification_status'] = '0';
+            $_POST['varification_status'] = '1';
             $post['users_id'] = $user_id = $this->saveRecord(conversion($post,'users_lib'),'users');
         }
 

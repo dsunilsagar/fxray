@@ -12,7 +12,7 @@
 
 
 
-        <?php $this->load->view('common/general/links');  ?>
+        <?php die(); $this->load->view('common/general/links');  ?>
 
 
         <link href="<?php echo base_url();  ?>public/css/general/redmond/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />
@@ -138,8 +138,8 @@
                                         <?php for($i=6; $i<=5; $i++){ ?>
                                         <div class="gallery_content">
                                             <div class="gallery_slide">
-                                                    <h2>Welcome to EDEALSPOT exchange!<?php echo $i; ?></h2>
-                                                    <p>Welcome to EdealSpot.com, a leading e-currency exchange service. Digital currency transaction is our forte and we make it fast, easy and safe for our customers to transfer money, exchange, buy and sell currency. </p>
+                                                    <h2>Welcome to <?php echo $i; ?></h2>
+                                                    <p>Welcome to </p>
                                                     <div class="fr r_more brad4"><a href="#">Read more</a></div>
                                             </div>
                                         </div>

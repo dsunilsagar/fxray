@@ -51,7 +51,7 @@ $active_record = TRUE;
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
-$db['default']['database'] = 'forexray';
+$db['default']['database'] = 'mql4_fxray';
 //edealspot
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
